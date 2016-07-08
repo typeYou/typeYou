@@ -10,3 +10,7 @@ class BaseUser(AbstractUser):
 
 class Teacher(BaseUser):
     pass
+
+
+class Student(BaseUser):
+    pass

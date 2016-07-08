@@ -1,1 +1,1 @@
-from .user import BaseUser, Teacher
+from .user import BaseUser, Teacher, Student
