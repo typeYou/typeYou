@@ -9,4 +9,4 @@ before_script:
 script:
     - pep8 .
 notifications:
-    - slack: typeyou:PHXH2hEoc85lVArIBjvu6IBz
+  slack: typeyou:cW32fYeMa22eSncpJoTgB364
