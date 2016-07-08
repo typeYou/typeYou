@@ -14,3 +14,4 @@ script:
     - pep8 .
 notifications:
   slack: typeyou:cW32fYeMa22eSncpJoTgB364
+  email: False
