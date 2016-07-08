@@ -28,5 +28,5 @@ class LoginView(View):
 
         if user:
             login(request, user)
-            return redirect('home')
+            return redirect('users:teachermypage')
         return redirect('users:login')
