@@ -6,3 +6,7 @@ class BaseUser(AbstractUser):
     phonenumber = models.CharField(
             max_length=16,
     )
+
+
+class Teacher(BaseUser):
+    pass
