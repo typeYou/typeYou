@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ site_name }}{% endblock %}
+
+{% block content %}
+<h1>{{ site_name }}</h1>
+<form action="{% url 'users:login' %}" method="POST">
+    {% csrf_token %} 
+    <input type="hidden" name="next_page" value={{ request.GET.next }}>
+    <input type="text" name="username" placeholder="username" required>
+    <input type="password" name="password" id="password" required>
+    <input type="submit" value="Login">
+</form>
+{% endblock %}
