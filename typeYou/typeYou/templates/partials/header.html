@@ -1,7 +1,11 @@
 <header>
     <ul>
         <li><a href="{% url 'home' %}">Home</a></li>
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url 'users:teachermypage' %}">{{ request.user.username }}</a></li>
+        {% else %}
         <li><a href="{% url 'users:login' %}">Login</a></li>
         <li><a href="{% url 'users:teachersignup' %}">Teacher Signup</a></li>
+        {% endif %}
     </ul>
 </header>
