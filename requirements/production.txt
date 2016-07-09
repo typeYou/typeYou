@@ -5,3 +5,5 @@ honcho
 gunicorn
 hashids
 django-pipeline
+django-storages-redux
+boto
