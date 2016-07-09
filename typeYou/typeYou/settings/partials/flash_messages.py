@@ -12,3 +12,5 @@ STUDENT_LOGIN_SUCCESS_MESSAGE = 'Successfully logged in as a Student'
 LOGOUT_SUCCESS_MESSAGE = 'Successfully logged out'
 
 LOGIN_ERROR_MESSAGE = 'Failed to login. Please try again'
+TEACHER_SIGNUP_DUPLICATE_USERNAME_ERROR_MESSAGE = 'Username already exists. Please try something else'
+STUDENT_SIGNUP_DUPLICATE_USERNAME_ERROR_MESSAGE = 'Username already exists. Please try something else'

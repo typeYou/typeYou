@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.conf import settings
 
-from users.models import Student
+from users.models import BaseUser, Student
 
 
 class StudentSignupView(View):
@@ -23,6 +23,15 @@ class StudentSignupView(View):
         phonenumber = request.POST.get('phonenumber')
         username = request.POST.get('username')
         password = request.POST.get('password')
+
+        for user in BaseUser.objects.all():
+            if user.username == username:
+                messages.add_message(
+                        request,
+                        messages.ERROR,
+                        settings.STUDENT_SIGNUP_DUPLICATE_USERNAME_ERROR_MESSAGE,
+                )
+                return redirect('users:studentsignup')
 
         student = Student.objects.create_user(
                 first_name=first_name,
