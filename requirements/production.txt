@@ -4,3 +4,4 @@ psycopg2
 honcho
 gunicorn
 hashids
+django-pipeline
