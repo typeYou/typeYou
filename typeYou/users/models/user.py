@@ -17,4 +17,7 @@ class Teacher(BaseUser):
 
 
 class Student(BaseUser):
-    pass
+    class Meta:
+        permissions = (
+                ('is_student', 'user is a student'),
+        )
