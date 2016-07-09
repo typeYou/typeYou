@@ -1,3 +1,5 @@
+import os
+
 from notifications.models import SMSNotification
 from .base import SendNotificationBaseTask
 
@@ -9,12 +11,12 @@ class SendSMSTask(SendNotificationBaseTask):
         return sms
 
     def get_api_base_url(self):
-        api_base_url = 'http://api.openapi.io/ppurio/1/message/sms/dobestan'
+        api_base_url = os.environ.get('SMS_BASE_URL')
         return api_base_url
 
     def get_headers(self):
         headers = {
-                'x-waple-authorization': 'MTkyMC0xNDEzODU0NTAwMzU3LTllM2VkOTM3LTYwMTEtNGU2Zi1iZWQ5LTM3NjAxMTNlNmYyMg=='
+                os.environ.get('SMS_HEADERS1'): os.environ.get('SMS_HEADERS2'),
         }
         return headers
 
