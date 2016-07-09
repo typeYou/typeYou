@@ -1,0 +1,14 @@
+# Flash Messages
+
+# Signup, Login, Logout
+
+
+TEACHER_SIGNUP_SUCCESS_MESSAGE = 'Successfully signed up as a Teacher'
+TEACHER_LOGIN_SUCCESS_MESSAGE = 'Successfully logged in as a Teacher'
+
+STUDENT_SIGNUP_SUCCESS_MESSAGE = 'Successfully signed up as a Student'
+STUDENT_LOGIN_SUCCESS_MESSAGE = 'Successfully logged in as a Student'
+
+LOGOUT_SUCCESS_MESSAGE = 'Successfully logged out'
+
+LOGIN_ERROR_MESSAGE = 'Failed to login. Please try again'

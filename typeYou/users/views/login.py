@@ -1,6 +1,8 @@
 from django.views.generic import View
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.conf import settings
 
 from users.models import BaseUser
 
@@ -29,9 +31,23 @@ class LoginView(View):
         if user:
             if user.has_perm('users.is_teacher'):
                 login(request, user)
+                messages.add_message(
+                        request,
+                        messages.SUCCESS,
+                        settings.TEACHER_LOGIN_SUCCESS_MESSAGE,
+                )
                 return redirect('users:teachermypage')
             elif user.has_perm('users.is_student'):
                 login(request, user)
+                messages.add_message(
+                        request,
+                        messages.SUCCESS,
+                        settings.STUDENT_LOGIN_SUCCESS_MESSAGE,
+                )
                 return redirect('users:studentmypage')
-            return redirect('users:login')
+        messages.add_message(
+                request,
+                messages.ERROR,
+                settings.LOGIN_ERROR_MESSAGE,
+        )
         return redirect('users:login')

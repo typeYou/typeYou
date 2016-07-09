@@ -1,5 +1,7 @@
 from django.views.generic import View
 from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.conf import settings
 
 from users.models import Teacher
 
@@ -29,5 +31,9 @@ class TeacherSignupView(View):
                 username=username,
                 password=password,
         )
-
+        messages.add_message(
+                request,
+                messages.SUCCESS,
+                settings.TEACHER_SIGNUP_SUCCESS_MESSAGE,
+        )
         return redirect('users:login')
