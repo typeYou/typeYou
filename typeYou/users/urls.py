@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^teachers/mypage/$', TeacherMyPageView.as_view(), name='teachermypage'),
 
     url(r'^students/signup/$', StudentSignupView.as_view(), name='studentsignup'),
+    url(r'^students/mypage/$', StudentMyPageView.as_view(), name='studentmypage'),
 
 ]
