@@ -1,5 +1,14 @@
-from django.http import HttpResponse
+from django.views.generic import View
+from django.shortcuts import render
 
 
-def home(request):
-    return HttpResponse("<h1>Hello typeYou</h1>")
+class HomeView(View):
+
+    def get(self, request, *args, **kwargs):
+        return render(
+                request,
+                'home.html',
+                {
+                    'site_name': 'typeYou',
+                }
+        )

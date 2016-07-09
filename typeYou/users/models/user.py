@@ -9,8 +9,15 @@ class BaseUser(AbstractUser):
 
 
 class Teacher(BaseUser):
-    pass
+    class Meta:
+        permissions = (
+                ('is_teacher', 'user is a teacher'),
+                ('create_question', 'user can create question'),
+        )
 
 
 class Student(BaseUser):
-    pass
+    class Meta:
+        permissions = (
+                ('is_student', 'user is a student'),
+        )
