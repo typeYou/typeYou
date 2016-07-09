@@ -1,17 +1,17 @@
 from django.views.generic import View
 from django.shortcuts import render, redirect
 
-from users.models import Teacher
+from users.models import Student
 
 
-class TeacherSignupView(View):
+class StudentSignupView(View):
 
     def get(self, request, *args, **kwargs):
         return render(
                 request,
-                'teachers/signup.html',
+                'students/signup.html',
                 {
-                    'site_name': 'Teacher Signup',
+                    'site_name': 'Student Signup',
                 }
         )
 
@@ -22,7 +22,7 @@ class TeacherSignupView(View):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        teacher = Teacher.objects.create_user(
+        student = Student.objects.create_user(
                 first_name=first_name,
                 last_name=last_name,
                 phonenumber=phonenumber,
