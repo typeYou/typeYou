@@ -29,6 +29,8 @@ INSTALLED_APPS = [
 
     'users',
     'quizzes',
+    'notifications',
+
 ]
 
 MIDDLEWARE_CLASSES = [

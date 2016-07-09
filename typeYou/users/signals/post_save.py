@@ -3,6 +3,7 @@ from django.dispatch import receiver
 from django.contrib.auth.models import Permission
 
 from users.models import Teacher, Student
+from notifications.models import SMSNotification
 
 
 @receiver(post_save, sender=Teacher)
@@ -14,6 +15,11 @@ def post_save_teacher(sender, instance, created, **kwargs):
                 permission,
                 permission1,
         )
+        sms = SMSNotification.objects.create(
+                sender='01031186228',
+                receiver=instance.phonenumber,
+                content='Thank you for registering as a Teacher',
+        )
         instance.save()
 
 
@@ -23,5 +29,10 @@ def post_save_student(sender, instance, created, **kwargs):
         permission = Permission.objects.get(codename='is_student')
         instance.user_permissions.add(
                 permission,
+        )
+        sms = SMSNotification.objects.create(
+                sender='01031186228',
+                receiver=instance.phonenumber,
+                content='Thank you for registering as a Student',
         )
         instance.save()
