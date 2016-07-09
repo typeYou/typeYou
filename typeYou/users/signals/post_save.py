@@ -2,8 +2,26 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import Permission
 
-from users.models import Teacher, Student
+from users.models import Teacher, Student, VerificationCode
 from notifications.models import SMSNotification
+
+from hashids import Hashids
+
+
+@receiver(post_save, sender=VerificationCode)
+def post_save_verification(sender, instance, created, **kwargs):
+    if created:
+        hashids = Hashids(salt="create verification code", min_length=6)
+        instance.hash_id = hashids.encode(instance.id)
+        instance.save()
+
+        sms = SMSNotification.objects.create(
+                sender='01031186228',
+                receiver=instance.phonenumber,
+                content='Verification Code: {code}'.format(
+                    code=instance.hash_id,
+                ),
+        )
 
 
 @receiver(post_save, sender=Teacher)

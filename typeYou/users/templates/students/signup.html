@@ -4,7 +4,7 @@
 
 {% block content %}
 <h1>{{ site_name }}</h1>
-<form action="{% url 'users:studentsignup' %}" method="POST">
+<form action="{% url 'users:studentverification' %}" method="POST">
     {% csrf_token %} 
     <input type="text" name="first_name" placeholder="first name" required>
     <input type="text" name="last_name" placeholder="last name" required>
