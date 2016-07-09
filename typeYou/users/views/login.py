@@ -27,6 +27,8 @@ class LoginView(View):
         )
 
         if user:
-            login(request, user)
-            return redirect('users:teachermypage')
+            if user.has_perm('users.is_teacher'):
+                login(request, user)
+                return redirect('users:teachermypage')
+            return redirect('users:login')
         return redirect('users:login')
