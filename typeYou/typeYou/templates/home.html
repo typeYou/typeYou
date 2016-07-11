@@ -4,4 +4,10 @@
 
 {% block content %}
 <h1>{{ site_name }}</h1>
+<form action="{% url "quizzes:create" %}" method="POST">
+{% csrf_token %}
+<button class="btn waves-effect waves-light" type="submit" name="action">Create Quiz
+  <i class="material-icons right">send</i>
+</button>
+</form>
 {% endblock %}

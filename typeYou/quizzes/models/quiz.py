@@ -1,5 +1,7 @@
+from django.core.urlresolvers import reverse
+
 from django.db import models
-from users.models import Teacher
+from users.models import BaseUser
 
 
 class QuizManager(models.Manager):
@@ -21,7 +23,7 @@ class Quiz(models.Model):
         null=True,
     )
 
-    user = models.ForeignKey(Teacher)
+    user = models.ForeignKey(BaseUser)  # 일단은 permission_required = "users.is_teacher" 로 선생님들만 만들 수 있게하자.
 
     is_published = models.BooleanField(
         default=False,
@@ -34,5 +36,5 @@ class Quiz(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.hash_id
+    def get_absolute_url(self):
+        return reverse("home")
