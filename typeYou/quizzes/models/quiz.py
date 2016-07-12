@@ -40,4 +40,6 @@ class Quiz(models.Model):
         return self.hash_id
 
     def get_absolute_url(self):
-        return reverse("home")
+        return reverse("quizzes:quiz_detail", kwargs={
+            "slug": self.hash_id,
+        })
