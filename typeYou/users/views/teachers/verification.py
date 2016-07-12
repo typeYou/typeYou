@@ -1,7 +1,9 @@
 from django.views.generic import View
 from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.conf import settings
 
-from users.models import VerificationCode
+from users.models import BaseUser, VerificationCode
 
 
 class TeacherVerification(View):
@@ -16,20 +18,29 @@ class TeacherVerification(View):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        code = VerificationCode.objects.create(
-                phonenumber=phonenumber,
-        )
+        for user in BaseUser.objects.all():
+            if user.username == username:
+                messages.add_message(
+                        request,
+                        messages.ERROR,
+                        settings.TEACHER_SIGNUP_DUPLICATE_USERNAME_ERROR_MESSAGE,
+                )
+                return redirect('users:teachersignup')
 
-        return render(
-                request,
-                'teachers/verification.html',
-                {
-                    'site_name': 'Verification Code',
-                    'first_name': first_name,
-                    'last_name': last_name,
-                    'phonenumber': phonenumber,
-                    'username': username,
-                    'password': password,
-                    'code': code,
-                }
-        )
+            code = VerificationCode.objects.create(
+                    phonenumber=phonenumber,
+            )
+
+            return render(
+                    request,
+                    'teachers/verification.html',
+                    {
+                        'site_name': 'Verification Code',
+                        'first_name': first_name,
+                        'last_name': last_name,
+                        'phonenumber': phonenumber,
+                        'username': username,
+                        'password': password,
+                        'code': code,
+                    }
+            )

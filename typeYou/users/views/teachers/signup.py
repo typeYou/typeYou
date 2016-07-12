@@ -26,15 +26,6 @@ class TeacherSignupView(View):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        for user in BaseUser.objects.all():
-            if user.username == username:
-                messages.add_message(
-                        request,
-                        messages.ERROR,
-                        settings.TEACHER_SIGNUP_DUPLICATE_USERNAME_ERROR_MESSAGE,
-                )
-                return redirect('users:teachersignup')
-
         if code == verification_code:
             teacher = Teacher.objects.create_user(
                     first_name=first_name,
