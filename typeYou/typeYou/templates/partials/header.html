@@ -2,7 +2,11 @@
     <ul>
         <li><a href="{% url 'home' %}">Home</a></li>
         {% if request.user.is_authenticated %}
-        <li><a href="{% url 'users:teachermypage' %}">{{ request.user.username }}</a></li>
+            {% if perms.users.is_teacher %}
+            <li><a href="{% url 'users:teachermypage' %}">{{ request.user.username }}</a></li>
+            {% else %}
+            <li><a href="{% url 'users:studentmypage' %}">{{ request.user.username }}</a></li>
+            {% endif %}
         <li><a href="{% url 'users:logout' %}">Logout</a></li>
         {% else %}
         <li><a href="{% url 'users:login' %}">Login</a></li>
