@@ -1,16 +1,17 @@
-from django.views.generic.detail import DetailView
+from django.views.generic.detail import View
+from django.shortcuts import render
 
 from quizzes.models import Quiz
 
 
-class QuizDetailView(DetailView):
-    model = Quiz
-    slug_field = "hash_id"
-    template_name = "quiz/detail.html"
-    context_object_name = "quiz"
+class QuizView(View):
 
-    def get_context_data(self, **kwargs):
-        context = super(QuizDetailView, self).get_context_data(**kwargs)
-        context['site_name'] = "typeYou"
+    def get(self, request, *args, **kwargs):
 
-        return context
+        return render(
+            request,
+            "quiz/detail.html",
+            context={
+                "site_name": "typeYou",
+                "quiz": Quiz.objects.get(hash_id=self.kwargs.get("slug")),
+            })

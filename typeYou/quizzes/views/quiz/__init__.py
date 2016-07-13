@@ -1,2 +1,2 @@
 from .create import CreateQuiz
-from .detail import QuizDetailView
+from .detail import QuizView
