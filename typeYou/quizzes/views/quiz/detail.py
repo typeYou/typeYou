@@ -1,5 +1,6 @@
+from django.core.urlresolvers import reverse
+from django.shortcuts import render, redirect
 from django.views.generic.detail import View
-from django.shortcuts import render
 
 from quizzes.models import Quiz
 
@@ -7,6 +8,15 @@ from quizzes.models import Quiz
 class QuizView(View):
 
     def get(self, request, *args, **kwargs):
+
+        hash_id = self.kwargs.get('slug')
+        quiz = Quiz.objects.get(hash_id=hash_id)
+
+        if request.user == quiz.user:
+            if not quiz.is_published:
+                return redirect(reverse("quizzes:quiz_edit", kwargs={
+                    'slug': hash_id,
+                }))
 
         return render(
             request,
