@@ -43,3 +43,8 @@ class Quiz(models.Model):
         return reverse("quizzes:quiz_detail", kwargs={
             "slug": self.hash_id,
         })
+
+    def get_create_action_url(self):
+        return reverse("quizzes:question_create", kwargs={
+            "slug": self.hash_id,
+        })

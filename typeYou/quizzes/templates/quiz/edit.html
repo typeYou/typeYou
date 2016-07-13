@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}{{ site_name }}{% endblock %}
+
+{% block content %}
+<section>
+	<h1>{{ quiz.hash_id }}</h1>
+	{% include "quiz/base_detail.html" %}
+
+	<div class="card">
+	<h4>Create Question</h4>
+	<form action="{{ quiz.get_create_action_url }}" method="POST">
+	  {% csrf_token %}
+		<div class="input-field">
+			<input id="title" name="title" type="text" class="validate">
+			<label for="title">title</label>
+		</div>
+		<div class="input-field">
+			<input id="ans1" name="ans1" type="text" class="validate">
+			<label for="ans1">answer 1</label>
+		</div>
+		<div class="input-field">
+			<input id="ans2" name="ans2" type="text" class="validate">
+			<label for="ans2">answer 2</label>
+		</div>
+		<div class="input-field">
+			<input id="ans3" name="ans3" type="text" class="validate">
+			<label for="ans3">answer 3</label>
+		</div>
+		<div class="input-field">
+			<input id="ans4" name="ans4" type="text" class="validate">
+			<label for="ans4">answer 4</label>
+		</div>
+		<button class="btn waves-effect waves-light" type="submit" name="action">Submit
+			<i class="material-icons right">send</i>
+		</button>
+	</form>
+	</div>
+
+</section>
+{% endblock %}

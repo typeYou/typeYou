@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 
 from users.models import BaseUser
@@ -43,3 +44,8 @@ class Question(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("quizzes:quiz_edit", kwargs={
+            "slug": self.quiz.hash_id,
+        })

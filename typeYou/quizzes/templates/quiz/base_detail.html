@@ -1,0 +1,12 @@
+<!-- quiz context is required -->
+<ul>
+{% for question in quiz.question_set.all %}
+	<div class="card">
+		<li><h4><strong>{{ forloop.counter }}. {{ question.title }}</strong></h4></li>
+		<li>{{ question.ans1 }}</li>
+		<li>{{ question.ans2 }}</li>
+		<li>{{ question.ans3 }}</li>
+		<li>{{ question.ans4 }}</li>
+	</div>
+{% endfor %}
+</ul>
