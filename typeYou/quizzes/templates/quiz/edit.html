@@ -5,6 +5,10 @@
 {% block content %}
 <section>
 	<h1>{{ quiz.hash_id }}</h1>
+    <form action="{% url 'quizzes:publish' slug=quiz.hash_id %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Publish">
+    </form>
 	{% include "quiz/base_detail.html" %}
 
 	<div class="card">

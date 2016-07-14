@@ -10,4 +10,7 @@ urlpatterns = [
     url(r'^(?P<slug>\w+)/edit/$', QuizEditView.as_view(), name="quiz_edit"),
 
     url(r'^(?P<slug>\w+)/create/$', QuizQuestionCreateView.as_view(), name="question_create"),
+
+    url(r'^(?P<slug>\w+)/publish/$', QuizPublishView.as_view(), name="publish"),
+
 ]
