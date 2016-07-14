@@ -18,29 +18,37 @@ class TeacherVerification(View):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        for user in BaseUser.objects.all():
-            if user.username == username:
-                messages.add_message(
-                        request,
-                        messages.ERROR,
-                        settings.TEACHER_SIGNUP_DUPLICATE_USERNAME_ERROR_MESSAGE,
+        if BaseUser.objects.count() > 0:
+            for user in BaseUser.objects.all():
+                if user.username == username:
+                    messages.add_message(
+                            request,
+                            messages.ERROR,
+                            settings.TEACHER_SIGNUP_DUPLICATE_USERNAME_ERROR_MESSAGE,
+                    )
+                    return redirect('users:teachersignup')
+
+                code = VerificationCode.objects.create(
+                        phonenumber=phonenumber,
                 )
-                return redirect('users:teachersignup')
 
-            code = VerificationCode.objects.create(
-                    phonenumber=phonenumber,
-            )
-
-            return render(
+                return render(
+                        request,
+                        'teachers/verification.html',
+                        {
+                            'site_name': 'Verification Code',
+                            'first_name': first_name,
+                            'last_name': last_name,
+                            'phonenumber': phonenumber,
+                            'username': username,
+                            'password': password,
+                            'code': code,
+                        }
+                )
+        else:
+            messages.add_message(
                     request,
-                    'teachers/verification.html',
-                    {
-                        'site_name': 'Verification Code',
-                        'first_name': first_name,
-                        'last_name': last_name,
-                        'phonenumber': phonenumber,
-                        'username': username,
-                        'password': password,
-                        'code': code,
-                    }
+                    messages.ERROR,
+                    settings.NO_USER_ERROR_MESSAGE,
             )
+            return redirect('users:teachersignup')
