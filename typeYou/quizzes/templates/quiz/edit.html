@@ -5,11 +5,14 @@
 {% block content %}
 <section>
 	<h1>{{ quiz.hash_id }}</h1>
+
+	{% include "quiz/base_detail.html" %}
     <form action="{% url 'quizzes:publish' slug=quiz.hash_id %}" method="POST">
         {% csrf_token %}
-        <input type="submit" value="Publish">
+        <button class="btn waves-effect waves-light" type="submit" name="action">Publish
+            <i class="material-icons right">send</i>
+        </button>
     </form>
-	{% include "quiz/base_detail.html" %}
 
 	<div class="card">
 	<h4>Create Question</h4>
