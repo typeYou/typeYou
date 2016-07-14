@@ -5,6 +5,14 @@
 {% block content %}
 <section>
 	<h1>{{ quiz.hash_id }}</h1>
+    {% if request.user == quiz.user %}
+    <a href="{% url 'quizzes:quiz_edit' slug=quiz.hash_id %}">
+        <button class="btn waves-effect waves-light" type="submit" name="action">Edit
+            <i class="material-icons right">send</i>
+        </button>
+    </a>
+    {% endif %}
+
 	{% include "quiz/base_detail.html" %}
 </section>
 {% endblock %}
