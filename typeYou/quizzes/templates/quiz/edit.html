@@ -6,12 +6,13 @@
 <section>
 	<h1>{{ quiz.hash_id }}</h1>
 
-	{% include "quiz/base_detail.html" %}
+	{% include "quiz/base_detail.html" with edit_page=quiz.is_edit_page %}
     <form action="{% url 'quizzes:publish' slug=quiz.hash_id %}" method="POST">
-        {% csrf_token %}
-        <button class="btn waves-effect waves-light" type="submit" name="action">Publish
-            <i class="material-icons right">send</i>
-        </button>
+			{% csrf_token %}
+			<button class="btn waves-effect waves-light" type="submit" name="action">Publish
+					<i class="material-icons right">send</i>
+			</button>
+			<a class="btn" href="{% url "quizzes:quiz_detail" slug=quiz.hash_id %}">Back</a>
     </form>
 
 	<div class="card">
