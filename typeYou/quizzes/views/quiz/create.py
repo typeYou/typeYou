@@ -6,7 +6,7 @@ from django.views.generic import View
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
-class CreateQuiz(PermissionRequiredMixin, View):
+class CreateQuizView(PermissionRequiredMixin, View):
 
     permission_required = "users.is_teacher"
 
