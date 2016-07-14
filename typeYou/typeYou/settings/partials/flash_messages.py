@@ -16,3 +16,5 @@ TEACHER_SIGNUP_DUPLICATE_USERNAME_ERROR_MESSAGE = 'Username already exists. Plea
 TEACHER_SIGNUP_INCORRECT_VERIFICATION_CODE_ERROR_MESSAGE = 'Incorrect Verification Code. Please signup again'
 STUDENT_SIGNUP_DUPLICATE_USERNAME_ERROR_MESSAGE = 'Username already exists. Please try something else'
 NO_USER_ERROR_MESSAGE = 'Please create an admin user'
+
+FOLLOW_SUCCESS_MESSAGE = 'Following user!'

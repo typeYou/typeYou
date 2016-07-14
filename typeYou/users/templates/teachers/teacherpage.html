@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ site_name }}{% endblock %}
+
+{% block content %}
+<h1>{{ site_name }}</h1>
+<form action="{% url 'users:follow' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="username" id="" value="{{ user.username }}">
+    <button class="btn waves-effect waves-light" type="submit" name="action">Follow {{ user.username }} 
+    <i class="material-icons right">send</i>
+    </button>
+</form>
+<h3>Published Quizzes</h3>
+<section>
+    <ul>
+        {% for quiz in user.quiz_set.published %}
+        <li><a href="{% url 'quizzes:quiz_detail' slug=quiz.hash_id %}">{{ quiz.hash_id }}</a></li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}

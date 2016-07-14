@@ -6,6 +6,10 @@ from users.views import *
 urlpatterns = [
     url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
+    url(r'^follow/$', FollowCreateView.as_view(), name='follow'),
+
+    url(r'^(?P<slug>\w+)/$', TeacherPageView.as_view(), name='teacherpage'),
+
     url(r'^teachers/signup/$', TeacherSignupView.as_view(), name='teachersignup'),
     url(r'^teachers/mypage/$', TeacherMyPageView.as_view(), name='teachermypage'),
     url(r'^teachers/verification/$', TeacherVerification.as_view(), name='teacherverification'),
