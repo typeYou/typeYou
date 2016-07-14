@@ -38,6 +38,7 @@
 		<li>{{ q.ans4 }}</li>
 		{% if is_quiz_edit_page %}
 		<a class="btn" href="{% url "quizzes:question_edit" slug1=quiz.hash_id slug2=q.id %}">Edit</a>
+		<a class="btn" href="{% url "quizzes:question_delete" slug1=quiz.hash_id slug2=q.id %}">Delete</a>
 		{% endif %}
 	{% endif %}
 	</div>

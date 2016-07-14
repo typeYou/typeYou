@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^(?P<slug>\w+)/question/create/$', QuizQuestionCreateView.as_view(), name="question_create"),
     url(r'^(?P<slug1>\w+)/question/(?P<slug2>\w+)/edit/$', QuizQuestionEditView.as_view(), name="question_edit"),
     url(r'^(?P<slug1>\w+)/question/(?P<slug2>\w+)/update/$', QuizQuestionUpdateView.as_view(), name="question_update"),
+    url(r'^(?P<slug1>\w+)/question/(?P<slug2>\w+)/delete/$', QuizQuestionDeleteView.as_view(), name="question_delete"),
 ]
