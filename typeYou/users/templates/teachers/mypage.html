@@ -4,4 +4,11 @@
 
 {% block content %}
 <h1>{{ site_name }}</h1>
+<section>
+    <ul>
+        {% for quiz in request.user.quiz_set.all %}
+        <li><a href="{% url 'quizzes:quiz_detail' slug=quiz.hash_id %}">{{ quiz.hash_id }}</a></li>
+        {% endfor %}
+    </ul>
+</section>
 {% endblock %}
