@@ -10,4 +10,13 @@
   <i class="material-icons right">send</i>
 </button>
 </form>
+
+<h3>Published Quizzes</h3>
+<section>
+    <ul>
+        {% for quiz in quizzes %}
+        <li><a href="{% url 'quizzes:quiz_detail' slug=quiz.hash_id %}">{{ quiz.hash_id }}</a> :: created by <a href="{% url 'users:teacherpage' slug=quiz.user.username %}">{{ quiz.user.username }}</a></li>
+        {% endfor %}
+    </ul>
+</section>
 {% endblock %}

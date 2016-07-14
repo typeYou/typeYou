@@ -1,6 +1,8 @@
 from django.views.generic import View
 from django.shortcuts import render
 
+from quizzes.models import Quiz
+
 
 class HomeView(View):
 
@@ -10,5 +12,6 @@ class HomeView(View):
                 'home.html',
                 {
                     'site_name': 'typeYou',
+                    'quizzes': Quiz.objects.published(),
                 }
         )
