@@ -1,25 +1,28 @@
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
-from django.views.generic.detail import View
+from django.views.generic import View
 
-from quizzes.models import Quiz
+from quizzes.models import Question, Quiz
 
 
-class QuizEditView(View):
+class QuizQuestionEditView(View):
 
     def get(self, request, *args, **kwargs):
 
-        hash_id = self.kwargs.get('slug')
+        hash_id = self.kwargs.get('slug1')
         quiz = Quiz.objects.get(hash_id=hash_id)
 
         if request.user != quiz.user:
             return redirect(reverse("home"))
 
+        question_id = self.kwargs.get('slug2')
+        question = quiz.question_set.get(id=question_id)
+
         return render(
             request,
-            "quiz/edit.html",
+            "question/edit.html",
             context={
                 "site_name": "typeYou",
-                "quiz": Quiz.objects.get(hash_id=self.kwargs.get("slug")),
-                "is_quiz_edit_page": True,
+                "quiz": quiz,
+                "question": question,
             })
