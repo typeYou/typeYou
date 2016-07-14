@@ -4,12 +4,15 @@
 
 {% block content %}
 <h1>{{ site_name }}</h1>
-<form action="{% url "quizzes:create" %}" method="POST">
-{% csrf_token %}
-<button class="btn waves-effect waves-light" type="submit" name="action">Create Quiz
-  <i class="material-icons right">send</i>
-</button>
-</form>
+
+{% if perms.users.create_question %}
+    <form action="{% url "quizzes:create" %}" method="POST">
+    {% csrf_token %}
+    <button class="btn waves-effect waves-light" type="submit" name="action">Create Quiz
+      <i class="material-icons right">send</i>
+    </button>
+    </form>
+{% endif %}
 
 <h3>Published Quizzes</h3>
 <section>
