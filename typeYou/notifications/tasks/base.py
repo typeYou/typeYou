@@ -1,7 +1,8 @@
 import requests
+from celery import Task
 
 
-class SendNotificationBaseTask():
+class SendNotificationBaseTask(Task):
 
     def get_object(self, object_id):
         raise NotImplementedError
