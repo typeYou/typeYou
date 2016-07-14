@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 
 class Follow(models.Model):
@@ -12,3 +13,11 @@ class Follow(models.Model):
             'BaseUser',
             related_name='+',
     )
+
+    def get_absolute_url(self):
+        return reverse(
+                'users:teacherpage',
+                kwargs={
+                    'slug': self.following,
+                }
+        )

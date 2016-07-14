@@ -5,5 +5,14 @@
 {% block content %}
 <h1>{{ site_name }}</h1>
 <h3>In Progress</h3>
-<h3>Recently Uploaded Quizzes</h3>  # recently uploaded by following teachers
+<h3>Recently Uploaded Quizzes</h3>
+<section>
+    <ul>
+        {% for user in request.user.following_set.all %}
+            {% for quiz in user.quiz_set.all %}
+            <li><a href="{{ quiz.get_absolute_url }}">{{ quiz.hash_id }}</a></li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</section>
 {% endblock%}
