@@ -12,4 +12,4 @@ class SMSNotification(BaseNotification):
     def send_notification(self):
         from notifications.tasks import SendSMSTask
         sms = SendSMSTask()
-        sms.run(self.id)
+        sms.delay(self.id)
