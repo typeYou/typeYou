@@ -1,8 +1,9 @@
 <!-- if user access to question edit page, make a form, submit button, back button. else, print questions only -->
 <ul>
-{% for q in quiz.question_set.public %}
+{% for q in quiz.question_set.public reversed %}
 <div id="question-{{ q.id }}" class="card">
 	{% if q == question %}
+    <h3>Edit Question {{ forloop.counter }}</h3>
 	<form action="{% url "quizzes:question_update" slug1=quiz.hash_id slug2=q.id %}" method="POST">
 	  {% csrf_token %}
 		<div class="input-field">
@@ -32,11 +33,34 @@
 	</form>
 	{% else %}
 		<li><h4><strong>{{ forloop.counter }}. {{ q.title }}</strong></h4></li>
-		<li>{{ q.ans1 }}</li>
-		<li>{{ q.ans2 }}</li>
-		<li>{{ q.ans3 }}</li>
-		<li>{{ q.ans4 }}</li>
+        <li>
+        <form action="{% url 'quizzes:question_answer' slug1=quiz.hash_id slug2=q.id %}" method="POST">
+            {% csrf_token %}
+            <p>
+            <input name="answer" type="radio" id="{{ forloop.counter }}-1" value="{{ q.ans1 }}"/>
+            <label for="{{ forloop.counter }}-1">{{ q.ans1 }}</label>
+            </p>
+            <p>
+            <input name="answer" type="radio" id="{{ forloop.counter }}-2" value="{{ q.ans2 }}"/>
+            <label for="{{ forloop.counter }}-2">{{ q.ans2 }}</label>
+            </p>
+            <p>
+            <input name="answer" type="radio" id="{{ forloop.counter }}-3" value="{{ q.ans3 }}"/>
+            <label for="{{ forloop.counter }}-3">{{ q.ans3 }}</label>
+            </p>
+            <p>
+            <input name="answer" type="radio" id="{{ forloop.counter }}-4" value="{{ q.ans4 }}"/>
+            <label for="{{ forloop.counter }}-4">{{ q.ans4 }}</label>
+            </p>
+            {% if is_quiz_edit_page %}
+            {% if q.answer %}Answer = {{ q.answer }}{% else %}Please Set Answer{% endif %}
+            </br>
+            <input type="submit" value="Save Answer">
+            {% endif %}
+            </form>
+        </li>
 		{% if is_quiz_edit_page %}
+        </br>
 		<a class="btn" href="{% url "quizzes:question_edit" slug1=quiz.hash_id slug2=q.id %}">Edit</a>
 		<a class="btn" href="{% url "quizzes:question_delete" slug1=quiz.hash_id slug2=q.id %}">Delete</a>
 		{% endif %}

@@ -35,6 +35,12 @@ class Question(models.Model):
         max_length=64,
     )
 
+    answer = models.CharField(
+            max_length=64,
+            blank=True,
+            null=True,
+    )
+
     is_public = models.BooleanField(
         default=True,
     )
