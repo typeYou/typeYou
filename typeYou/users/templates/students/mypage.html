@@ -9,7 +9,7 @@
 <section>
     <ul>
         {% for user in request.user.following_set.all %}
-            {% for quiz in user.quiz_set.all %}
+            {% for quiz in user.quiz_set.published %}
             <li><a href="{{ quiz.get_absolute_url }}">{{ quiz.hash_id }}</a></li>
             {% endfor %}
         {% endfor %}
