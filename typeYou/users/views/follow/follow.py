@@ -29,4 +29,9 @@ class FollowCreateView(LoginRequiredMixin, CreateView):
                     settings.FOLLOW_SUCCESS_MESSAGE,
             )
             return super(FollowCreateView, self).form_valid(form)
+        messages.add_message(
+                self.request,
+                messages.SUCCESS,
+                settings.ALREADY_FOLLOWING_ERROR_MESSAGE,
+        )
         return redirect(reverse('users:teacherpage', kwargs={'slug': form.instance.following.username}))
