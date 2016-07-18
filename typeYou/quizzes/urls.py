@@ -16,4 +16,5 @@ urlpatterns = [
     url(r'^(?P<slug1>\w+)/question/(?P<slug2>\w+)/correct_ans_update/$', QuizQuestionAnswerUpdateView.as_view(), name="question_answer_update"),
 
     url(r'^(?P<slug>\w+)/answer/list/$', AnswerListView.as_view(), name="answer_list"),
+    url(r'^(?P<slug>\w+)/answer/create/$', AnswerCreateView.as_view(), name="answer_create"),
 ]

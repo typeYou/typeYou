@@ -5,10 +5,10 @@
 {% block content %}
 <section>
 	<h1>{{ quiz.hash_id }}</h1>
-    <form action="" method="POST">
+		<form action="{% url "quizzes:answer_create" slug=quiz.hash_id %}" method="POST">
 			{% csrf_token %}
 			<ul>
-				{% for q in quiz.question_set.public reversed %}
+				{% for q in quiz.question_set.public %}
 				<div id="question-{{ q.id }}" class="card">
 					<li><h4><strong>{{ forloop.counter }}. {{ q.title }}</strong></h4></li>
 					<li>
