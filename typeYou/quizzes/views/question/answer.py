@@ -18,7 +18,7 @@ class QuizQuestionAnswerUpdateView(View):
         question = quiz.question_set.get(id=kwargs.get('slug2'))
         answer = request.POST.get('answer')
 
-        question.answer = answer
+        question.correct_ans = answer
         question.save()
 
         return redirect(question)

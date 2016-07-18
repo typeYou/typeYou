@@ -35,7 +35,7 @@ class Question(models.Model):
         max_length=64,
     )
 
-    answer = models.CharField(
+    correct_ans = models.CharField(
             max_length=64,
             blank=True,
             null=True,

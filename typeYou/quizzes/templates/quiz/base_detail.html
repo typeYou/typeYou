@@ -1,6 +1,6 @@
 <!-- if user access to question edit page, make a form, submit button, back button. else, print questions only -->
 <ul>
-{% for q in quiz.question_set.public reversed %}
+{% for q in quiz.question_set.public %}
 <div id="question-{{ q.id }}" class="card">
 	{% if q == question %}
     <h3>Edit Question {{ forloop.counter }}</h3>
@@ -34,7 +34,7 @@
 	{% else %}
 		<li><h4><strong>{{ forloop.counter }}. {{ q.title }}</strong></h4></li>
         <li>
-        <form action="{% url 'quizzes:question_answer' slug1=quiz.hash_id slug2=q.id %}" method="POST">
+        <form action="{% url 'quizzes:question_answer_update' slug1=quiz.hash_id slug2=q.id %}" method="POST">
             {% csrf_token %}
             <p>
             <input name="answer" type="radio" id="{{ forloop.counter }}-1" value="{{ q.ans1 }}"/>
@@ -53,7 +53,7 @@
             <label for="{{ forloop.counter }}-4">{{ q.ans4 }}</label>
             </p>
             {% if is_quiz_edit_page %}
-            {% if q.answer %}Answer = {{ q.answer }}{% else %}Please Set Answer{% endif %}
+            {% if q.correct_ans %}Answer = {{ q.correct_ans }}{% else %}Please Set Answer{% endif %}
             </br>
             <input type="submit" value="Save Answer">
             {% endif %}
