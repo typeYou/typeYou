@@ -1,7 +1,7 @@
 from django.db import models
 
 from users.models import BaseUser
-from quizzes.models import Question
+from quizzes.models import Quiz, Question
 
 
 class AnswerManager(models.Manager):
@@ -15,6 +15,8 @@ class Answer(models.Model):
     objects = AnswerManager()
 
     user = models.ForeignKey(BaseUser)
+
+    quiz = models.ForeignKey(Quiz)
 
     question = models.ForeignKey(Question)
 

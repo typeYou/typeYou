@@ -20,6 +20,6 @@ class AnswerCreateView(View):
 
         for index, question in enumerate(quiz.question_set.public()):
             answer = request.POST.get('answer-{index}'.format(index=index+1))
-            q = request.user.answer_set.create(ans=answer, question=question)
+            q = request.user.answer_set.create(ans=answer, quiz=question.quiz, question=question)
 
         return redirect("/login/")  # TODO: fix to direct correctly
