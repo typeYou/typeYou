@@ -11,6 +11,12 @@
             <i class="material-icons right">send</i>
         </button>
     </a>
+		{% else %}
+    <a href="{% url 'quizzes:answer_list' slug=quiz.hash_id %}">
+        <button class="btn waves-effect waves-light" type="submit" name="action">solve
+            <i class="material-icons right">send</i>
+        </button>
+    </a>
     {% endif %}
 
 	{% include "quiz/base_detail.html" %}
