@@ -53,7 +53,7 @@
             <label for="{{ forloop.counter }}-4">{{ q.ans4 }}</label>
             </p>
             {% if is_quiz_edit_page %}
-            {% if q.answer %}Answer = {{ q.answer }}{% else %}Please Set Answer{% endif %}
+            {% if q.correct_ans %}Answer = {{ q.correct_ans }}{% else %}Please Set Answer{% endif %}
             </br>
             <input type="submit" value="Save Answer">
             {% endif %}
