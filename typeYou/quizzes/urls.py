@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^(?P<slug1>\w+)/question/(?P<slug2>\w+)/edit/$', QuizQuestionEditView.as_view(), name="question_edit"),
     url(r'^(?P<slug1>\w+)/question/(?P<slug2>\w+)/update/$', QuizQuestionUpdateView.as_view(), name="question_update"),
     url(r'^(?P<slug1>\w+)/question/(?P<slug2>\w+)/delete/$', QuizQuestionDeleteView.as_view(), name="question_delete"),
-    url(r'^(?P<slug1>\w+)/question/(?P<slug2>\w+)/answer/$', QuizQuestionAnswerUpdateView.as_view(), name="question_answer"),
+    url(r'^(?P<slug1>\w+)/question/(?P<slug2>\w+)/correct_ans_update/$', QuizQuestionAnswerUpdateView.as_view(), name="question_answer_update"),
 
+    url(r'^(?P<slug>\w+)/answer/list/$', AnswerListView.as_view(), name="answer_list"),
 ]

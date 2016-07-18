@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}{{ site_name }}{% endblock %}
+
+{% block content %}
+<section>
+	<h1>{{ quiz.hash_id }}</h1>
+    <form action="" method="POST">
+			{% csrf_token %}
+			<ul>
+				{% for q in quiz.question_set.public reversed %}
+				<div id="question-{{ q.id }}" class="card">
+					<li><h4><strong>{{ forloop.counter }}. {{ q.title }}</strong></h4></li>
+					<li>
+						<p>
+						<input name="answer-{{ forloop.counter }}" type="radio" id="{{ forloop.counter }}-1" value="{{ q.ans1 }}"/>
+						<label for="{{ forloop.counter }}-1">{{ q.ans1 }}</label>
+						</p>
+						<p>
+						<input name="answer-{{ forloop.counter }}" type="radio" id="{{ forloop.counter }}-2" value="{{ q.ans2 }}"/>
+						<label for="{{ forloop.counter }}-2">{{ q.ans2 }}</label>
+						</p>
+						<p>
+						<input name="answer-{{ forloop.counter }}" type="radio" id="{{ forloop.counter }}-3" value="{{ q.ans3 }}"/>
+						<label for="{{ forloop.counter }}-3">{{ q.ans3 }}</label>
+						</p>
+						<p>
+						<input name="answer-{{ forloop.counter }}" type="radio" id="{{ forloop.counter }}-4" value="{{ q.ans4 }}"/>
+						<label for="{{ forloop.counter }}-4">{{ q.ans4 }}</label>
+						</p>
+					</li>
+				</div>
+				{% endfor %}
+			</ul>
+			<button class="btn waves-effect waves-light" type="submit" name="action">Submit
+					<i class="material-icons right">send</i>
+			</button>
+			<a class="btn" href="{% url "quizzes:quiz_detail" slug=quiz.hash_id %}">Back</a>
+    </form>
+
+</section>
+{% endblock %}
+
+
+
+

@@ -19,13 +19,13 @@ class Answer(models.Model):
     question = models.ForeignKey(Question)
 
     ans = models.CharField(
-            max_length=64,
+        max_length=64,
     )
 
     correct = models.NullBooleanField(
-            blank=True,
-            null=True,
-            default=None,
+        blank=True,
+        null=True,
+        default=None,
     )
 
     is_public = models.BooleanField(
