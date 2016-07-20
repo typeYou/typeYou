@@ -23,7 +23,13 @@ class Quiz(models.Model):
         null=True,
     )
 
-    user = models.ForeignKey(BaseUser)  # 일단은 permission_required = "users.is_teacher" 로 선생님들만 만들 수 있게하자.
+    user = models.ForeignKey(BaseUser)
+
+    solve_user_set = models.ManyToManyField(
+        BaseUser,
+        related_name="solve_quiz_set",
+        through="Solve",
+    )
 
     is_published = models.BooleanField(
         default=False,
