@@ -5,7 +5,7 @@ from django.views.generic import View
 from quizzes.models import Quiz
 
 
-class AnswerListView(View):
+class AnswerSolveView(View):
 
     def get(self, request, *args, **kwargs):
 
@@ -17,7 +17,7 @@ class AnswerListView(View):
 
         return render(
             request,
-            "answer/list.html",
+            "answer/solve.html",
             context={
                 "site_name": "typeYou",
                 "quiz": quiz,

@@ -1,2 +1,2 @@
-from .list import AnswerListView
+from .solve import AnswerSolveView
 from .create import AnswerCreateView
