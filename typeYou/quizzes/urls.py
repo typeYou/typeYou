@@ -17,4 +17,6 @@ urlpatterns = [
 
     url(r'^(?P<slug>\w+)/answer/solve/$', AnswerSolveView.as_view(), name="answer_solve"),
     url(r'^(?P<slug>\w+)/answer/create/$', AnswerCreateView.as_view(), name="answer_create"),
+    url(r'^(?P<slug>\w+)/answer/result/$', AnswerResultView.as_view(), name="answer_result"),
+    url(r'^(?P<slug>\w+)/answer/result/before_making/$', AnswerResultBeforeMarkingView.as_view(), name="result_before_marking"),
 ]
