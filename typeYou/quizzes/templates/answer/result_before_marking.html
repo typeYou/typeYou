@@ -5,6 +5,10 @@
 {% block content %}
 <section>
 	<h1>{{ quiz.hash_id }}</h1>
+	{% if editable %}
+	<h1 class="red">TODO: add a edit button</h1>
+	<p class="red"> when quiz is not marked, this is shown </p>
+	{% endif %}
 	<form action="#">
 	{% csrf_token %}
 		<ul>

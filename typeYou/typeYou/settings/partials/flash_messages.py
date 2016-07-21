@@ -19,3 +19,8 @@ NO_USER_ERROR_MESSAGE = 'Please create an admin user'
 
 FOLLOW_SUCCESS_MESSAGE = 'Now following user!'
 ALREADY_FOLLOWING_ERROR_MESSAGE = 'Already following user!'
+
+
+# Quiz, Question, Answer
+
+ANSWER_ALREADY_EXIST_ERROR_MESSAGE = 'Answers already exist!'

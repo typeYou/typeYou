@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.views.generic import View
@@ -18,9 +20,16 @@ class AnswerCreateView(View):
         if request.user == quiz.user:
             return redirect(reverse("home"))
 
-        # TODO: prevent Answer submit if it exist already
         if quiz in request.user.solve_quiz_set.all():  # if answer is already submitted
-            pass
+            messages.add_message(
+                    request,
+                    messages.ERROR,
+                    settings.ANSWER_ALREADY_EXIST_ERROR_MESSAGE,
+            )
+            return redirect(reverse("quizzes:answer_result", kwargs={
+                'slug': hash_id,
+                })
+            )
 
         for index, question in enumerate(quiz.question_set.public()):
             answer = request.POST.get('answer-{index}'.format(index=index+1))
