@@ -18,7 +18,7 @@ class AnswerResultView(View):
 
         if quiz:
             answers = quiz.answer_set.filter(user=request.user)
-            # if there is not a been making question, redirect user to before_marking page
+            # if there is not a been marking question, redirect user to before_marking page
             for answer in answers:
                 if answer.correct is None:
                     return redirect(reverse(
@@ -28,7 +28,7 @@ class AnswerResultView(View):
                         })
                     )
 
-            # TODO: if making by quiz's owner has done, show some statistic information
+            # TODO: if marking by quiz's owner has done, show some statistic information
 
         else:
             # TODO: There is no solved quiz by request.user. redirect anywhere.
