@@ -28,4 +28,7 @@ class AnswerCreateView(View):
 
         Solve.objects.create(user=request.user, quiz=quiz)
 
-        return redirect("/login/")  # TODO: fix to direct correctly
+        return redirect(reverse("quizzes:answer_result", kwargs={
+            'slug': hash_id,
+            })
+        )

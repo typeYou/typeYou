@@ -15,11 +15,14 @@ class AnswerResultBeforeMarkingView(View):
         except ObjectDoesNotExist:
             quiz = None
 
+        answers = quiz.answer_set.public().filter(user=request.user)
+
         return render(
             request,
             "answer/result_before_marking.html",
             context={
                 "site_name": "typeYou",
                 "quiz": quiz,
+                "answers": answers
             }
         )
