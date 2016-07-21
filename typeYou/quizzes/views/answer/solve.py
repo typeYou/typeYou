@@ -15,6 +15,17 @@ class AnswerSolveView(View):
         if request.user == quiz.user:
             return redirect(reverse("home"))
 
+        # if quiz is already submitted, redirect to result page
+        if quiz in request.user.solve_quiz_set.filter(hash_id=hash_id):
+            return redirect(
+                reverse(
+                    "quizzes:answer_result",
+                    kwargs={
+                        'slug': hash_id,
+                    }
+                )
+            )
+
         return render(
             request,
             "answer/solve.html",
