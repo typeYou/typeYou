@@ -17,7 +17,7 @@ class AnswerResultView(View):
             quiz = None
 
         if quiz:
-            answers = quiz.answer_set.filter(user=request.user)
+            answers = quiz.answer_set.public().filter(user=request.user)
             # if there is not a been marking question, redirect user to before_marking page
             for answer in answers:
                 if answer.correct is None:

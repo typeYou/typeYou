@@ -20,7 +20,7 @@ class AnswerCreateView(View):
         if request.user == quiz.user:
             return redirect(reverse("home"))
 
-        if quiz in request.user.solve_quiz_set.all():  # if answer is already submitted
+        if quiz in request.user.solve_quiz_set.public():  # if answer is already submitted
             messages.add_message(
                     request,
                     messages.ERROR,
@@ -39,7 +39,7 @@ class AnswerCreateView(View):
 
         messages.add_message(
             request,
-            messages.ERROR,
+            messages.SUCCESS,
             settings.ANSWER_CREATE_SUCCESS_MESSAGE,
         )
         return redirect(reverse("quizzes:answer_result", kwargs={

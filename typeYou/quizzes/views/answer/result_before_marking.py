@@ -19,7 +19,7 @@ class AnswerResultBeforeMarkingView(View):
         answers = quiz.answer_set.public().filter(user=request.user)
 
         # if answers are not marked by Quiz owner,
-        if quiz.answer_set.filter(correct=None):
+        if quiz.answer_set.public().filter(correct=None):
             editable = True
 
         return render(

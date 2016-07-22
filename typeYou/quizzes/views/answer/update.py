@@ -31,7 +31,7 @@ class AnswerUpdateView(View):
                 })
             )
 
-        answers = quiz.answer_set.filter(user=request.user)
+        answers = quiz.answer_set.public().filter(user=request.user)
 
         for index, answer in enumerate(answers):
             data_from_post_get = request.POST.get('answer-{index}'.format(index=index+1))
