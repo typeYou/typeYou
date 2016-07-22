@@ -24,3 +24,4 @@ ALREADY_FOLLOWING_ERROR_MESSAGE = 'Already following user!'
 # Quiz, Question, Answer
 
 ANSWER_ALREADY_EXIST_ERROR_MESSAGE = 'Answers already exist!'
+ANSWER_CREATE_SUCCESS_MESSAGE = 'Successfully create your answer'

@@ -37,6 +37,11 @@ class AnswerCreateView(View):
 
         Solve.objects.create(user=request.user, quiz=quiz)
 
+        messages.add_message(
+            request,
+            messages.ERROR,
+            settings.ANSWER_ALREADY_EXIST_ERROR_MESSAGE,
+        )
         return redirect(reverse("quizzes:answer_result", kwargs={
             'slug': hash_id,
             })
