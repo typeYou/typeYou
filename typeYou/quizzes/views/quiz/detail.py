@@ -24,4 +24,5 @@ class QuizView(View):
             context={
                 "site_name": "typeYou",
                 "quiz": Quiz.objects.get(hash_id=self.kwargs.get("slug")),
+                "quiz_detail_page": True,
             })
