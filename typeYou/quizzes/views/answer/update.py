@@ -7,7 +7,7 @@ from django.views.generic import View
 from quizzes.models import Question, Quiz, Solve
 
 
-class AnswerCreateView(View):
+class AnswerUpdateView(View):
 
     def get(self, request, *args, **kwargs):
         return redirect(reverse("home"))
@@ -20,27 +20,28 @@ class AnswerCreateView(View):
         if request.user == quiz.user:
             return redirect(reverse("home"))
 
-        if quiz in request.user.solve_quiz_set.all():  # if answer is already submitted
+        if quiz not in request.user.solve_quiz_set.all():  # if submitted answer does not exist
             messages.add_message(
-                    request,
-                    messages.ERROR,
-                    settings.ANSWER_ALREADY_EXIST_ERROR_MESSAGE,
+                request,
+                messages.ERROR,
+                settings.ANSWER_DOES_NOT_EXIST_ERROR_MESSAGE,
             )
-            return redirect(reverse("quizzes:answer_result", kwargs={
+            return redirect(reverse("quizzes:quiz_detail", kwargs={
                 'slug': hash_id,
                 })
             )
 
-        for index, question in enumerate(quiz.question_set.public()):
-            answer = request.POST.get('answer-{index}'.format(index=index+1))
-            q = request.user.answer_set.create(ans=answer, quiz=question.quiz, question=question)
+        answers = quiz.answer_set.filter(user=request.user)
 
-        Solve.objects.create(user=request.user, quiz=quiz)
+        for index, answer in enumerate(answers):
+            data_from_post_get = request.POST.get('answer-{index}'.format(index=index+1))
+            answer.ans = data_from_post_get
+            answer.save()
 
         messages.add_message(
             request,
-            messages.ERROR,
-            settings.ANSWER_CREATE_SUCCESS_MESSAGE,
+            messages.SUCCESS,
+            settings.ANSWER_UPDATE_SUCCESS_MESSAGE,
         )
         return redirect(reverse("quizzes:answer_result", kwargs={
             'slug': hash_id,

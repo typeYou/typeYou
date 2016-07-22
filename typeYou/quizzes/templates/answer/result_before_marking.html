@@ -5,10 +5,6 @@
 {% block content %}
 <section>
 	<h1>{{ quiz.hash_id }}</h1>
-	{% if editable %}
-	<h1 class="red">TODO: add a edit button</h1>
-	<p class="red"> when quiz is not marked, this is shown </p>
-	{% endif %}
 	<form action="#">
 	{% csrf_token %}
 		<ul>
@@ -36,6 +32,11 @@
 			</div>
 			{% endfor %}
 		</ul>
+	{% if editable %}
+	<a class="btn waves-effect waves-light" href="{% url "quizzes:answer_edit" slug=quiz.hash_id %}">edit
+		<i class="material-icons right">send</i>
+	</a>
+	{% endif %}
 	</form>
 </section>
 {% endblock %}
