@@ -15,12 +15,12 @@ class AnswerUpdateView(View):
     def post(self, request, *args, **kwargs):
 
         hash_id = self.kwargs.get('slug')
-        quiz = Quiz.objects.get(hash_id=hash_id)
+        quiz = Quiz.objects.public().get(hash_id=hash_id)
 
         if request.user == quiz.user:
             return redirect(reverse("home"))
 
-        if quiz not in request.user.solve_quiz_set.all():  # if submitted answer does not exist
+        if quiz not in request.user.solve_quiz_set.public():  # if submitted answer does not exist
             messages.add_message(
                 request,
                 messages.ERROR,

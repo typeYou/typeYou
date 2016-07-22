@@ -14,7 +14,7 @@ class AnswerEditView(View):
 
         # Exception for a possibility of which user hasn't solved this quiz but access this page.
         try:
-            quiz = request.user.solve_quiz_set.get(hash_id=hash_id)
+            quiz = request.user.solve_quiz_set.public().get(hash_id=hash_id)
         except ObjectDoesNotExist:
             quiz = None
 

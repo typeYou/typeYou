@@ -15,7 +15,7 @@ class AnswerCreateView(View):
     def post(self, request, *args, **kwargs):
 
         hash_id = self.kwargs.get('slug')
-        quiz = Quiz.objects.get(hash_id=hash_id)
+        quiz = Quiz.objects.public().get(hash_id=hash_id)
 
         if request.user == quiz.user:
             return redirect(reverse("home"))

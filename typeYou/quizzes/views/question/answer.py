@@ -10,12 +10,12 @@ class QuizQuestionAnswerUpdateView(View):
         return redirect('home')
 
     def post(self, request, *args, **kwargs):
-        quiz = Quiz.objects.get(hash_id=self.kwargs.get('slug1'))
+        quiz = Quiz.objects.public().get(hash_id=self.kwargs.get('slug1'))
 
         if request.user != quiz.user:
             return redirect('home')
 
-        question = quiz.question_set.get(id=kwargs.get('slug2'))
+        question = quiz.question_set.public().get(id=kwargs.get('slug2'))
         answer = request.POST.get('answer')
 
         question.correct_ans = answer
