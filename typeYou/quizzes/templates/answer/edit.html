@@ -8,8 +8,9 @@
 	<form action="{% url "quizzes:answer_update" slug=quiz.hash_id %}" method="POST">
 		{% csrf_token %}
 		<ul>
-			{% for answer in answers %}
+			{% for answer in answers reversed%}
 			<div id="question-{{ answer.question.id }}" class="card">
+				<input type="hidden" name="question-{{ forloop.counter }}" value="{{ answer.question.id }}"/>
 				<li><h4><strong>{{ forloop.counter }}. {{ answer.question.title }}</strong></h4></li>
 				<li>
 					<p>

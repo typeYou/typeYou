@@ -33,9 +33,12 @@ class AnswerUpdateView(View):
 
         answers = quiz.answer_set.public().filter(user=request.user)
 
-        for index, answer in enumerate(answers):
-            data_from_post_get = request.POST.get('answer-{index}'.format(index=index+1))
-            answer.ans = data_from_post_get
+        for index, _ in enumerate(quiz.question_set.public()):
+            answer_data = request.POST.get('answer-{index}'.format(index=index+1))
+            question_id = request.POST.get('question-{index}'.format(index=index+1))
+            question = Question.objects.public().get(id=question_id)
+            answer = question.answer_set.public().get(user=request.user)
+            answer.ans = answer_data
             answer.save()
 
         messages.add_message(

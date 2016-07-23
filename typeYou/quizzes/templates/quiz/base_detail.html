@@ -1,6 +1,6 @@
 <!-- if user access to question edit page, make a form, submit button, back button. else, print questions only -->
 <ul>
-{% for q in quiz.question_set.public %}
+{% for q in quiz.question_set.public reversed %}
 <div id="question-{{ q.id }}" class="card">
 	{% if q == question %}
     <h3>Edit Question {{ forloop.counter }}</h3>

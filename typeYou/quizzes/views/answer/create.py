@@ -31,9 +31,11 @@ class AnswerCreateView(View):
                 })
             )
 
-        for index, question in enumerate(quiz.question_set.public()):
-            answer = request.POST.get('answer-{index}'.format(index=index+1))
-            q = request.user.answer_set.create(ans=answer, quiz=question.quiz, question=question)
+        for index, _ in enumerate(quiz.question_set.public()):
+            answer_data = request.POST.get('answer-{index}'.format(index=index+1))
+            question_id = request.POST.get('question-{index}'.format(index=index+1))
+            question = Question.objects.public().get(id=question_id)
+            request.user.answer_set.create(ans=answer_data, quiz=question.quiz, question=question)
 
         Solve.objects.create(user=request.user, quiz=quiz)
 
