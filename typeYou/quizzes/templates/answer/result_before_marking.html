@@ -36,6 +36,7 @@
 	<a class="btn waves-effect waves-light" href="{% url "quizzes:answer_edit" slug=quiz.hash_id %}">edit
 		<i class="material-icons right">send</i>
 	</a>
+	<a class="btn waves-effect waves-light" href="{% url "quizzes:answer_delete" slug=quiz.hash_id %}">delete</a>
 	{% endif %}
 	</form>
 </section>
