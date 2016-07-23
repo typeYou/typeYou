@@ -34,7 +34,7 @@ class AnswerDeleteView(View):
             answer.is_public = False
             answer.save()
 
-        solved_quiz = Solve.objects.get(quiz=quiz)
+        solved_quiz = Solve.objects.get(user=request.user, quiz=quiz)
         solved_quiz.delete()
 
         messages.add_message(
