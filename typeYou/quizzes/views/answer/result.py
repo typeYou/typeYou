@@ -1,6 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.views.generic import View
 
 
@@ -28,8 +28,15 @@ class AnswerResultView(View):
                         })
                     )
 
-            # TODO: if marking by quiz's owner has done, show some statistic information
+            return render(
+                request,
+                "answer/result.html",
+                context={
+                    "site_name": "typeYou",
+                    "quiz": quiz,
+                    "answers": answers,
+                },
+            )
 
         else:
-            # TODO: There is no solved quiz by request.user. redirect anywhere.
-            pass
+            return redirect(reverse("home"))

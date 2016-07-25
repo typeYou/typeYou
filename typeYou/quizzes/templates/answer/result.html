@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}{{ site_name }}{% endblock %}
+
+{% block content %}
+<section>
+	<h1>{{ quiz.hash_id }}</h1>
+	<form action="#">
+	{% csrf_token %}
+		<ul>
+			{% for answer in answers reversed %}
+			<div id="question-{{ answer.question.id }}" class="card">
+				{% if answer.correct == True %}
+				<i class="right material-icons large green-text">check</i>
+				{% elif answer.correct == False %}
+				<i class="right material-icons large red-text">close</i>
+				{% else %}
+				{% endif %}
+				<input type="hidden" name="question-{{ forloop.counter }}" value="{{ q.id }}"/>
+				<li><h4><strong>{{ forloop.counter }}. {{ answer.question.title }}</strong></h4></li>
+				<li>
+					<p>
+					<input {% if answer.question.ans1 != answer.ans %}disabled {% else %}checked {% endif %}name="answer-{{ forloop.counter }}" type="radio" id="{{ forloop.counter }}-1" value="{{ answer.question.ans1 }}"/>
+					<label for="{{ forloop.counter }}-1">{{ answer.question.ans1 }}</label>
+					</p>
+					<p>
+					<input {% if answer.question.ans2 != answer.ans %}disabled {% else %}checked {% endif %}name="answer-{{ forloop.counter }}" type="radio" id="{{ forloop.counter }}-2" value="{{ answer.question.ans2 }}"/>
+					<label for="{{ forloop.counter }}-2">{{ answer.question.ans2 }}</label>
+					</p>
+					<p>
+					<input {% if answer.question.ans3 != answer.ans %}disabled {% else %}checked {% endif %}name="answer-{{ forloop.counter }}" type="radio" id="{{ forloop.counter }}-3" value="{{ answer.question.ans3 }}"/>
+					<label for="{{ forloop.counter }}-3">{{ answer.question.ans3 }}</label>
+					</p>
+					<p>
+					<input {% if answer.question.ans4 != answer.ans %}disabled {% else %}checked {% endif %}name="answer-{{ forloop.counter }}" type="radio" id="{{ forloop.counter }}-4" value="{{ answer.question.ans4 }}"/>
+					<label for="{{ forloop.counter }}-4">{{ answer.question.ans4 }}</label>
+					</p>
+				</li>
+			</div>
+			{% endfor %}
+		</ul>
+	</form>
+</section>
+{% endblock %}
