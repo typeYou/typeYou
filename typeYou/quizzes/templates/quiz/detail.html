@@ -11,6 +11,11 @@
             <i class="material-icons right">send</i>
         </button>
     </a>
+    <a href="{% url 'quizzes:quiz_marking' slug=quiz.hash_id %}">
+        <button class="btn waves-effect waves-light" type="submit" name="action">Marking
+            <i class="material-icons right">send</i>
+        </button>
+    </a>
 		{% else %}
     <a href="{% url 'quizzes:answer_solve' slug=quiz.hash_id %}">
         <button class="btn waves-effect waves-light" type="submit" name="action">solve
