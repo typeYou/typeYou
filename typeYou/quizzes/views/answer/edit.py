@@ -1,14 +1,16 @@
+from django.conf import settings
+from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render
+from django.core.urlresolvers import reverse
+from django.shortcuts import redirect, render
 from django.views.generic import View
 
 
-class AnswerResultBeforeMarkingView(View):
+class AnswerEditView(View):
 
     def get(self, request, *args, **kwargs):
 
         hash_id = self.kwargs.get('slug')
-        editable = False
 
         # Exception for a possibility of which user hasn't solved this quiz but access this page.
         try:
@@ -16,19 +18,26 @@ class AnswerResultBeforeMarkingView(View):
         except ObjectDoesNotExist:
             quiz = None
 
-        answers = quiz.answer_set.public().filter(user=request.user)
+        if not quiz:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                settings.ANSWER_DOES_NOT_EXIST_ERROR_MESSAGE
+            )
 
-        # if answers are not marked by Quiz owner,
-        if quiz.answer_set.public().filter(correct=None):
-            editable = True
+            return redirect(reverse("quizzes:quiz_detail", kwargs={
+                "slug": hash_id,
+                })
+            )
+
+        answers = quiz.answer_set.public().filter(user=request.user)
 
         return render(
             request,
-            "answer/result_before_marking.html",
+            "answer/edit.html",
             context={
                 "site_name": "typeYou",
                 "quiz": quiz,
                 "answers": answers,
-                "editable": editable,
             }
         )

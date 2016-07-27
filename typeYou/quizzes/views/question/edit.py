@@ -10,13 +10,13 @@ class QuizQuestionEditView(View):
     def get(self, request, *args, **kwargs):
 
         hash_id = self.kwargs.get('slug1')
-        quiz = Quiz.objects.get(hash_id=hash_id)
+        quiz = Quiz.objects.public().get(hash_id=hash_id)
 
         if request.user != quiz.user:
             return redirect(reverse("home"))
 
         question_id = self.kwargs.get('slug2')
-        question = quiz.question_set.get(id=question_id)
+        question = quiz.question_set.public().get(id=question_id)
 
         return render(
             request,

@@ -55,3 +55,15 @@ class Question(models.Model):
         return reverse("quizzes:quiz_edit", kwargs={
             "slug": self.quiz.hash_id,
         })
+
+    def get_ans(self, index):
+        if index == 1:
+            return self.ans1
+        elif index == 2:
+            return self.ans2
+        elif index == 3:
+            return self.ans3
+        elif index == 4:
+            return self.ans4
+        else:
+            return None

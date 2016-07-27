@@ -1,6 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.views.generic import View
 
 
@@ -12,12 +12,12 @@ class AnswerResultView(View):
 
         # Exception for a possibility of which user hasn't solved this quiz but access this page.
         try:
-            quiz = request.user.solve_quiz_set.get(hash_id=hash_id)
+            quiz = request.user.solve_quiz_set.public().get(hash_id=hash_id)
         except ObjectDoesNotExist:
             quiz = None
 
         if quiz:
-            answers = quiz.answer_set.filter(user=request.user)
+            answers = quiz.answer_set.public().filter(user=request.user)
             # if there is not a been marking question, redirect user to before_marking page
             for answer in answers:
                 if answer.correct is None:
@@ -28,8 +28,15 @@ class AnswerResultView(View):
                         })
                     )
 
-            # TODO: if marking by quiz's owner has done, show some statistic information
+            return render(
+                request,
+                "answer/result.html",
+                context={
+                    "site_name": "typeYou",
+                    "quiz": quiz,
+                    "answers": answers,
+                },
+            )
 
         else:
-            # TODO: There is no solved quiz by request.user. redirect anywhere.
-            pass
+            return redirect(reverse("home"))

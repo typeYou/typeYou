@@ -29,6 +29,8 @@ INSTALLED_APPS = [
 
     'pipeline',
     'storages',
+    'django_nvd3',
+    'djangobower',
 
     'users',
     'quizzes',
@@ -95,9 +97,9 @@ LOGIN_URL = '/login/'
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
@@ -122,6 +124,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 
     'pipeline.finders.PipelineFinder',
+    'djangobower.finders.BowerFinder',
 )
 
 PIPELINE = {
@@ -146,3 +149,13 @@ PIPELINE = {
         }
     }
 }
+
+# Django-bower
+# https://github.com/areski/django-nvd3/blob/develop/nvd3_tests/testproject/settings.py
+# -------------------------------------------------------------------------------------
+BOWER_COMPONENTS_ROOT = os.path.join(PROJECT_ROOT_DIR, 'components')
+BOWER_PATH = '/usr/local/bin/bower'
+BOWER_INSTALLED_APPS = (
+    'd3#3.3.13',
+    'nvd3#1.7.1',
+)

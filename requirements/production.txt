@@ -10,3 +10,5 @@ boto
 celery
 redis
 flower
+django-nvd3
+django-bower

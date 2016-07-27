@@ -10,7 +10,10 @@ class QuizManager(models.Manager):
         return self.filter(is_public=True)
 
     def published(self):
-        return self.filter(is_published=True)
+        return self.filter(is_published=True, is_public=True)
+
+    def marked(self):
+        return self.filter(is_marked=True, is_published=True, is_public=True)
 
 
 class Quiz(models.Model):
@@ -37,6 +40,10 @@ class Quiz(models.Model):
 
     is_public = models.BooleanField(
         default=True,
+    )
+
+    is_marked = models.BooleanField(
+        default=False,
     )
 
     created_at = models.DateTimeField(auto_now_add=True)

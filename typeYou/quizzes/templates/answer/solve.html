@@ -8,8 +8,9 @@
 		<form action="{% url "quizzes:answer_create" slug=quiz.hash_id %}" method="POST">
 			{% csrf_token %}
 			<ul>
-				{% for q in quiz.question_set.public %}
+				{% for q in quiz.question_set.public reversed %}
 				<div id="question-{{ q.id }}" class="card">
+					<input type="hidden" name="question-{{ forloop.counter }}" value="{{ q.id }}"/>
 					<li><h4><strong>{{ forloop.counter }}. {{ q.title }}</strong></h4></li>
 					<li>
 						<p>

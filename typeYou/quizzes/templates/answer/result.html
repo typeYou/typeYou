@@ -10,6 +10,12 @@
 		<ul>
 			{% for answer in answers reversed %}
 			<div id="question-{{ answer.question.id }}" class="card">
+				{% if answer.correct == True %}
+				<i class="right material-icons large green-text">check</i>
+				{% elif answer.correct == False %}
+				<i class="right material-icons large red-text">close</i>
+				{% else %}
+				{% endif %}
 				<input type="hidden" name="question-{{ forloop.counter }}" value="{{ answer.question.id }}"/>
 				<li><h4><strong>{{ forloop.counter }}. {{ answer.question.title }}</strong></h4></li>
 				<li>
@@ -33,12 +39,6 @@
 			</div>
 			{% endfor %}
 		</ul>
-	{% if editable %}
-	<a class="btn waves-effect waves-light" href="{% url "quizzes:answer_edit" slug=quiz.hash_id %}">edit
-		<i class="material-icons right">send</i>
-	</a>
-	<a class="btn waves-effect waves-light" href="{% url "quizzes:answer_delete" slug=quiz.hash_id %}">delete</a>
-	{% endif %}
 	</form>
 </section>
 {% endblock %}
