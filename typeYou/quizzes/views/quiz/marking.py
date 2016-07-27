@@ -25,9 +25,16 @@ class QuizMarkingView(View):
         # we don't use asynchronous function for answers marking feature
         # it is because answers marking should let the quiz owner know if it finished
 
-        messages.add_message(
-            request,
-            messages.SUCCESS,
-            settings.ANSWER_MARKING_SUCCESS_MESSAGE,
+        if quiz.is_marked is True:
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                settings.ANSWER_MARKING_SUCCESS_MESSAGE,
+            )
+        # FIXME: This feature works even if it is on exceptional circumstances
+        # someday, make this feature work properly
+
+        return redirect(reverse("quizzes:quiz_result", kwargs={
+            'slug': hash_id,
+            })
         )
-        return redirect(reverse("home"))  # TODO: redirect to result page

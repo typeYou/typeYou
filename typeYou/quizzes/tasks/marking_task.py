@@ -10,4 +10,6 @@ class MarkingTask(Task):
                 answer.correct = True
             else:
                 answer.correct = False
+            quiz.is_marked = True
+            quiz.save()
             answer.save()
