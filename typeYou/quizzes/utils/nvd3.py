@@ -39,7 +39,11 @@ def create_chart_data_set(quiz):
     ydata = count_each_answer(quiz)
 
     color_list = ['#247BA0', '#70C1B3', '#B2DBBF', '#F3FFBD', '#FF1654', ]
-    extra_serie = {"color_list": color_list}
+    tooltip = {"y_start": "", "y_end": ""}  # TODO: it needs to show more informative data
+    extra_serie = {
+        "color_list": color_list,
+        "tooltip": tooltip,
+    }
 
     data_set = [
         {
