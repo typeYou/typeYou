@@ -21,8 +21,8 @@ def count_each_answer(quiz):
     data = [
         [
             question.answer_set.public().filter(ans=question.get_ans(index+1)).count()
-            for index, answer
-            in enumerate(question.answer_set.public())
+            for index, _
+            in enumerate(range(4))  # TODO: inputted number 4 should be changeable later.
         ]
         for question
         in quiz.question_set.public()
