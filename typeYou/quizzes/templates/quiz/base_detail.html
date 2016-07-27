@@ -37,23 +37,23 @@
         <form action="{% url 'quizzes:question_answer_update' slug1=quiz.hash_id slug2=q.id %}" method="POST">
             {% csrf_token %}
             <p>
-						<input {% if quiz_detail_page %}disabled {% endif %}name="answer" type="radio" id="{{ forloop.counter }}-1" value="{{ q.ans1 }}"/>
+						<input {% if quiz_detail_page %}disabled {% endif %}{% if is_quiz_edit_page and q.ans1 == q.correct_ans %}checked {% endif %}name="answer" type="radio" id="{{ forloop.counter }}-1" value="{{ q.ans1 }}"/>
             <label for="{{ forloop.counter }}-1">{{ q.ans1 }}</label>
             </p>
             <p>
-            <input {% if quiz_detail_page %}disabled {% endif %}name="answer" type="radio" id="{{ forloop.counter }}-2" value="{{ q.ans2 }}"/>
+            <input {% if quiz_detail_page %}disabled {% endif %}{% if is_quiz_edit_page and q.ans2 == q.correct_ans %}checked {% endif %}name="answer" type="radio" id="{{ forloop.counter }}-2" value="{{ q.ans2 }}"/>
             <label for="{{ forloop.counter }}-2">{{ q.ans2 }}</label>
             </p>
             <p>
-            <input {% if quiz_detail_page %}disabled {% endif %}name="answer" type="radio" id="{{ forloop.counter }}-3" value="{{ q.ans3 }}"/>
+            <input {% if quiz_detail_page %}disabled {% endif %}{% if is_quiz_edit_page and q.ans3 == q.correct_ans %}checked {% endif %}name="answer" type="radio" id="{{ forloop.counter }}-3" value="{{ q.ans3 }}"/>
             <label for="{{ forloop.counter }}-3">{{ q.ans3 }}</label>
             </p>
             <p>
-            <input {% if quiz_detail_page %}disabled {% endif %}name="answer" type="radio" id="{{ forloop.counter }}-4" value="{{ q.ans4 }}"/>
+            <input {% if quiz_detail_page %}disabled {% endif %}{% if is_quiz_edit_page and q.ans4 == q.correct_ans %}checked {% endif %}name="answer" type="radio" id="{{ forloop.counter }}-4" value="{{ q.ans4 }}"/>
             <label for="{{ forloop.counter }}-4">{{ q.ans4 }}</label>
             </p>
             {% if is_quiz_edit_page %}
-            {% if q.correct_ans %}Answer = {{ q.correct_ans }}{% else %}Please Set Answer{% endif %}
+            {% if not q.correct_ans %}Please Set Answer{% endif %}
             </br>
             <input type="submit" value="Save Answer">
             {% endif %}
