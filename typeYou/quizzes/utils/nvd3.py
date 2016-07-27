@@ -35,8 +35,8 @@ def create_chart_data_set(quiz):
     """
     generate data_set for django-nvd3 pieChart
     """
-    xdata = quiz.get_answers_of_each_question(quiz)
-    ydata = quiz.count_each_answer(quiz)
+    xdata = get_answers_of_each_question(quiz)
+    ydata = count_each_answer(quiz)
 
     data_set = [
         {
