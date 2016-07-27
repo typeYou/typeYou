@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}{{ site_name }}{% endblock %}
+
+{% block content %}
+<section>
+	<h1>{{ quiz.hash_id }}</h1>
+	<form action="#">
+	{% csrf_token %}
+		<ul>
+			{% for data in chart_data_set reversed %}
+			<div id="question-{{ data.chartcontainer }}" class="card">
+				<input type="hidden" name="question-{{ forloop.counter }}" value="{{ data.chartcontainer }}"/>
+				<li><h4><strong>{{ forloop.counter }}. {{ data.title }}</strong></h4></li>
+				<p>{{ data.title }}</p>
+				<p>{{ data.charttype }}</p>
+				<p>{{ data.chartdata }}</p>
+				<p>{{ data.chartcontainer }}</p>
+				<p>{{ data.extra }}</p>
+			</div>
+			{% endfor %}
+		</ul>
+	</form>
+</section>
+{% endblock %}
