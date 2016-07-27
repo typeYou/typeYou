@@ -10,7 +10,7 @@ class QuizManager(models.Manager):
         return self.filter(is_public=True)
 
     def published(self):
-        return self.filter(is_published=True)
+        return self.filter(is_published=True, is_public=True)
 
 
 class Quiz(models.Model):
