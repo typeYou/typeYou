@@ -38,12 +38,15 @@ def create_chart_data_set(quiz):
     xdata = get_answers_of_each_question(quiz)
     ydata = count_each_answer(quiz)
 
+    color_list = ['#247BA0', '#70C1B3', '#B2DBBF', '#F3FFBD', '#FF1654', ]
+    extra_serie = {"color_list": color_list}
+
     data_set = [
         {
             'title': question.title,
             'charttype': "pieChart",
-            'chartdata': {'x': xdata[index], 'y': ydata[index]},
-            'chartcontainer': str(question.id),
+            'chartdata': {'x': xdata[index], 'y': ydata[index], 'extra': extra_serie},
+            'chartcontainer': "question_{id}".format(id=question.id),
             'extra': {
                 'x_is_date': False,
                 'x_axis_format': '',
