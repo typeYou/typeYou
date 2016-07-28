@@ -3,15 +3,21 @@
 {% block title %}{{ site_name }}{% endblock %}
 
 {% block content %}
-<section>
-	<h1>Finding the Quiz</h1>
+<div id="single_page_container" class="container valign-wrapper">
+	<div class="container">
+		<h1 class="center">Find <span class="mycolor-2-text">Quiz</span></h1>
 	<form action="{% url "quizzes:quiz_find" %}" method="POST">
 		{% csrf_token %}
 		<div class="input-field">
 			<input name="input_quiz_id"id="input_quiz_id" type="text" length="4">
 			<label for="input_quiz_id">Input Quiz ID</label>
 		</div>
-		<button class="btn-large mycolor-2"  type="submit" name="action">Find</button>
+		<br>
+		<div class="row center">
+			<button class="btn-large mycolor-2"  type="submit" name="action">find
+			</button>
+		</div>
+		<br><br>
 	</form>
 </section>
 
@@ -46,4 +52,5 @@
 		</div>
   </div>
 </section>
+</div>
 {% endblock %}

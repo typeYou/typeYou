@@ -9,7 +9,7 @@
 	padding-left: 240px;
 }
 
-#home_container {
+#home_container, #single_page_container {
 	height: 100vh;
 }
 
@@ -17,6 +17,9 @@
 	font-size: 150px;
 }
 
+#single_page_container h1 {
+	font-size: 100px;
+}
 
 @media only screen and (max-width : 992px) {
 	#messages, header, main, footer {
@@ -24,6 +27,9 @@
 	}
 	#home_container h1 {
 	font-size: 100px;
+	}
+  #single_page_container h1 {
+		font-size: 60px;
 	}
 }
 

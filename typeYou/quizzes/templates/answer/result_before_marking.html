@@ -3,8 +3,9 @@
 {% block title %}{{ site_name }}{% endblock %}
 
 {% block content %}
-<section>
-	<h1>{{ quiz.hash_id }}</h1>
+<div class="container valign-wrapper">
+	<div class="container">
+		<h1>result <span class="mycolor-2-text">Your </span>{{ quiz.hash_id }}</h1>
 	<form action="#">
 	{% csrf_token %}
 		<ul>
@@ -40,5 +41,6 @@
 	<a class="btn waves-effect waves-light" href="{% url "quizzes:answer_delete" slug=quiz.hash_id %}">delete</a>
 	{% endif %}
 	</form>
-</section>
+	</div>
+</div>
 {% endblock %}

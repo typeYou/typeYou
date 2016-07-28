@@ -3,6 +3,8 @@
 {% block title %}{{ site_name }}{% endblock %}
 
 {% block content %}
+<div id="single_page_container" class="container valign-wrapper">
+	<div class="container">
 <h1>{{ site_name }}</h1>
 <form action="{% url 'users:studentsignup' %}" method="POST">
     {% csrf_token %} 
@@ -13,6 +15,11 @@
     <input type="hidden" name="password" value="{{ password }}">
     <input type="hidden" name="code" value="{{ code }}">
     <input type="text" name="verification_code" placeholder="Verification Code" required>
-    <input type="submit" value="Submit Code">
+		<div class="row center">
+			<button class="btn-large mycolor-2"  type="submit" name="action">Submit Code
+			</button>
+		</div>
+	</div>
+</div>
 </form>
 {% endblock %}
