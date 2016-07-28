@@ -3,16 +3,27 @@
 {% block title %}{{ site_name }}{% endblock %}
 
 {% block content %}
-<h1>{{ site_name }}</h1>
-<h3>In Progress</h3>
-<h3>Recently Uploaded Quizzes</h3>
-<section>
-    <ul>
-        {% for user in request.user.following_set.all %}
-            {% for quiz in user.quiz_set.published %}
-            <li><a href="{{ quiz.get_absolute_url }}">{{ quiz.hash_id }}</a></li>
-            {% endfor %}
-        {% endfor %}
-    </ul>
-</section>
-{% endblock%}
+<div class="container valign-wrapper">
+	<div class="container">
+		<h1>{{ site_name }}</h1>
+		<table class="centered">
+			<thead>
+				<tr>
+					<th data-field="quiz">Quiz</th>
+					<th data-field="created_by">created by</th>
+					<th data-field="created_at">created at</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for quiz in request.user.solve_quiz_set.public %}
+				<tr>
+					<td><a href="{% url 'quizzes:quiz_detail' slug=quiz.hash_id %}">{{ quiz.hash_id }}</a></td>
+					<td>:: created by <a href="{% url 'users:teacherpage' slug=quiz.user.username %}">{{ quiz.user.username }}</a></td>
+					<td>{{ quiz.created_at }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+{% endblock %}

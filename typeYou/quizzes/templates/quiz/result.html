@@ -10,19 +10,23 @@
 {% endblock %}
 
 {% block content %}
-<section>
-	<h1>{{ quiz.hash_id }}</h1>
+<div class="container valign-wrapper">
+	<div class="container">
+		<h1>result <span class="mycolor-2-text">All </span>{{ quiz.hash_id }}</h1>
 	<form action="#">
 	{% csrf_token %}
 		<ul>
 			{% for data in chart_data_set %}
 			<div id="question-{{ data.chartcontainer }}" class="card">
+				<div class="card-content">
 				<input type="hidden" name="question-{{ forloop.counter }}" value="{{ data.chartcontainer }}"/>
-				<li><h4><strong>{{ forloop.counter }}. {{ data.title }}</strong></h4></li>
+				<span class="card-title">{{ forloop.counter }}. {{ data.title }}</span></li>
 				{% include_container data.chartcontainer 400 600 %}
+				</div>
 			</div>
 			{% endfor %}
 		</ul>
 	</form>
-</section>
+	</div>
+</div>
 {% endblock %}

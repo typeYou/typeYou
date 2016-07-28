@@ -3,12 +3,25 @@
 {% block title %}{{ site_name }}{% endblock %}
 
 {% block content %}
-<h1>{{ site_name }}</h1>
-<section>
-    <ul>
-        {% for quiz in request.user.quiz_set.all %}
-        <li><a href="{% url 'quizzes:quiz_detail' slug=quiz.hash_id %}">{{ quiz.hash_id }}</a></li>
-        {% endfor %}
-    </ul>
-</section>
+<div class="container valign-wrapper">
+	<div class="container">
+		<h1>{{ site_name }}</h1>
+		<table class="centered">
+			<thead>
+				<tr>
+					<th data-field="quiz">Quiz</th>
+					<th data-field="created_at">created at</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for quiz in request.user.quiz_set.public %}
+				<tr>
+					<td><a href="{% url 'quizzes:quiz_detail' slug=quiz.hash_id %}">{{ quiz.hash_id }}</a></td>
+					<td>{{ quiz.created_at }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
 {% endblock %}

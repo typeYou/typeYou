@@ -3,20 +3,30 @@
 {% block title %}{{ site_name }}{% endblock %}
 
 {% block content %}
-<section>
-	<h1>{{ quiz.hash_id }}</h1>
+<div class="container valign-wrapper">
+	<div class="container">
+		<div class="row">
+			<h1>type<span class="mycolor-2-text">Quiz</span> | {{ quiz.hash_id }}</h1>
+		</div>
+		<div class="row">
+				<form action="{% url 'quizzes:publish' slug=quiz.hash_id %}" method="POST">
+					{% csrf_token %}
+					<button class="btn waves-effect waves-light" type="submit" name="action">Publish
+							<i class="material-icons right">publish</i>
+					</button>
+					<a class="btn" href="{% url "quizzes:quiz_detail" slug=quiz.hash_id %}">Back</a>
+				</form>
+		</div>
 
 	{% include "quiz/base_detail.html" with edit_page=quiz.is_edit_page %}
-    <form action="{% url 'quizzes:publish' slug=quiz.hash_id %}" method="POST">
-			{% csrf_token %}
-			<button class="btn waves-effect waves-light" type="submit" name="action">Publish
-					<i class="material-icons right">send</i>
-			</button>
-			<a class="btn" href="{% url "quizzes:quiz_detail" slug=quiz.hash_id %}">Back</a>
-    </form>
+
+	<br>
+	<div class="divider"></div>
+	<br>
 
 	<div class="card">
-	<h4>Create Question</h4>
+	<div class="card-content">
+		<span class="card-title">Create Question</span>
 	<form action="{{ quiz.get_create_action_url }}" method="POST">
 	  {% csrf_token %}
 		<div class="input-field">
@@ -39,11 +49,15 @@
 			<input id="ans4" name="ans4" type="text" class="validate">
 			<label for="ans4">answer 4</label>
 		</div>
-		<button class="btn waves-effect waves-light" type="submit" name="action">Add Question
+	</div>
+		<div class="card-action">
+		<button class="btn-flat waves-effect waves-light" type="submit" name="action">Add Question
 			<i class="material-icons right">send</i>
 		</button>
+		</div>
 	</form>
 	</div>
 
-</section>
+</div>
+</div>
 {% endblock %}

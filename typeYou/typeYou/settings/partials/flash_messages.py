@@ -28,6 +28,7 @@ ANSWER_DOES_NOT_EXIST_ERROR_MESSAGE = 'Answer does not exist!'
 ANSWER_CREATE_SUCCESS_MESSAGE = 'Successfully create your answer'
 ANSWER_UPDATE_SUCCESS_MESSAGE = 'Successfully update your answer'
 ANSWER_DELETE_SUCCESS_MESSAGE = 'Successfully delete your answer'
+ANSWER_FINDING_IS_FAILED_ERROR_MESSAGE = 'Your requested quiz does not exist '
 
 
 # Task

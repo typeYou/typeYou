@@ -12,6 +12,5 @@ class HomeView(View):
                 'home.html',
                 {
                     'site_name': 'typeYou',
-                    'quizzes': Quiz.objects.public().filter(is_published=True),
                 }
         )

@@ -3,8 +3,9 @@
 {% block title %}{{ site_name }}{% endblock %}
 
 {% block content %}
-<section>
-	<h1>{{ quiz.hash_id }}</h1>
+<div class="container valign-wrapper">
+	<div class="container">
+		<h1>edit <span class="mycolor-2-text">Your </span>{{ quiz.hash_id }}</h1>
 	<form action="{% url "quizzes:answer_update" slug=quiz.hash_id %}" method="POST">
 		{% csrf_token %}
 		<ul>
@@ -38,6 +39,6 @@
 		</button>
 		<a class="btn" href="{% url "quizzes:answer_result" slug=quiz.hash_id %}">Back</a>
 	</form>
-
-</section>
+	</div>
+</div>
 {% endblock %}

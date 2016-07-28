@@ -3,7 +3,7 @@
 {% for q in quiz.question_set.public reversed %}
 <div id="question-{{ q.id }}" class="card">
 	{% if q == question %}
-    <h3>Edit Question {{ forloop.counter }}</h3>
+	<div class="card-content">
 	<form action="{% url "quizzes:question_update" slug1=quiz.hash_id slug2=q.id %}" method="POST">
 	  {% csrf_token %}
 		<div class="input-field">
@@ -26,13 +26,17 @@
 			<input id="ans4" name="ans4" type="text" class="validate" value="{{ q.ans4 }}">
 			<label class="active" for="ans4">answer 4</label>
 		</div>
-		<button class="btn waves-effect waves-light" type="submit" name="action">Submit
+	</div>
+	<div class="card-action">
+		<button class="btn-flat waves-effect waves-light" type="submit" name="action">Submit
 			<i class="material-icons right">send</i>
 		</button>
-		<a class="btn" href="{% url "quizzes:quiz_edit" slug=quiz.hash_id %}">Back</a>
+		<a href="{% url "quizzes:quiz_edit" slug=quiz.hash_id %}">Back</a>
 	</form>
+	</div>
 	{% else %}
-		<li><h4><strong>{{ forloop.counter }}. {{ q.title }}</strong></h4></li>
+	<div class="card-content">
+		<span class="card-title">{{ forloop.counter }}. {{ q.title }}</span>
         <li>
         <form action="{% url 'quizzes:question_answer_update' slug1=quiz.hash_id slug2=q.id %}" method="POST">
             {% csrf_token %}
@@ -55,15 +59,19 @@
             {% if is_quiz_edit_page %}
             {% if not q.correct_ans %}Please Set Answer{% endif %}
             </br>
-            <input type="submit" value="Save Answer">
+						<button class="btn mycolor-2"  type="submit" name="action">Save Answer
+						</button>
             {% endif %}
             </form>
         </li>
-		{% if is_quiz_edit_page %}
         </br>
-		<a class="btn" href="{% url "quizzes:question_edit" slug1=quiz.hash_id slug2=q.id %}">Edit</a>
-		<a class="btn" href="{% url "quizzes:question_delete" slug1=quiz.hash_id slug2=q.id %}">Delete</a>
+		</div>
+		<div class="card-action">
+		{% if is_quiz_edit_page %}
+		<a href="{% url "quizzes:question_edit" slug1=quiz.hash_id slug2=q.id %}">Edit</a>
+		<a href="{% url "quizzes:question_delete" slug1=quiz.hash_id slug2=q.id %}">Delete</a>
 		{% endif %}
+		</div>
 	{% endif %}
 	</div>
 {% endfor %}

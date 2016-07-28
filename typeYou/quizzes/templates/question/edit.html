@@ -3,12 +3,12 @@
 {% block title %}{{ site_name }}{% endblock %}
 
 {% block content %}
-<section>
-	<h1>{{ quiz.hash_id }}</h1>
+<div class="container valign-wrapper">
+	<div class="container">
+		<h1>Edit<span class="mycolor-2-text">Quiz</span> | {{ quiz.hash_id }}</h1>
 
-	{% include "quiz/base_detail.html" %}
-	<button class="btn disabled" type="submit" name="disabled_action">Publish
-			<i class="material-icons right">send</i>
-	</button>
-</section>
+		{% include "quiz/base_detail.html" %}
+	</div>
+</div>
+
 {% endblock %}

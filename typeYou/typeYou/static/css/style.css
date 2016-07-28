@@ -5,3 +5,61 @@
  *
  * Made By MaterializeCSS.com
  */ 
+#messages, header, main, footer {
+	padding-left: 240px;
+}
+
+#home_container, #single_page_container {
+	height: 100vh;
+}
+
+#home_container h1 {
+	font-size: 150px;
+}
+
+#single_page_container h1 {
+	font-size: 100px;
+}
+
+@media only screen and (max-width : 992px) {
+	#messages, header, main, footer {
+		padding-left: 0;
+	}
+	#home_container h1 {
+	font-size: 100px;
+	}
+  #single_page_container h1 {
+		font-size: 60px;
+	}
+}
+
+.mycolor-1 {
+  background-color: #247BA0 !important;
+}
+.mycolor-2 {
+  background-color: #70C1B3 !important;
+}
+.mycolor-3 {
+  background-color: #B2DBBF !important;
+}
+.mycolor-4 {
+  background-color: #F3FFBD !important;
+}
+.mycolor-5 {
+  background-color: #FF1654 !important;
+}
+.mycolor-1-text {
+  color: #247BA0 !important;
+}
+.mycolor-2-text {
+  color: #70C1B3 !important;
+}
+.mycolor-3-text {
+  color: #B2DBBF !important;
+}
+.mycolor-4-text {
+  color: #F3FFBD !important;
+}
+.mycolor-5-text {
+  color: #FF1654 !important;
+}
