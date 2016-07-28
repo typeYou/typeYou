@@ -1,17 +1,29 @@
 <header>
-    <ul>
-        <li><a href="{% url 'home' %}">Home</a></li>
-        {% if request.user.is_authenticated %}
-            {% if perms.users.is_teacher %}
-            <li><a href="{% url 'users:teachermypage' %}">{{ request.user.username }}</a></li>
-            {% else %}
-            <li><a href="{% url 'users:studentmypage' %}">{{ request.user.username }}</a></li>
-            {% endif %}
-        <li><a href="{% url 'users:logout' %}">Logout</a></li>
-        {% else %}
-        <li><a href="{% url 'users:login' %}">Login</a></li>
-        <li><a href="{% url 'users:teachersignup' %}">Teacher Signup</a></li>
-        <li><a href="{% url 'users:studentsignup' %}">Student Signup</a></li>
-        {% endif %}
-    </ul>
+	<div class="container"><a href="#" data-activates="nav-mobile" class="button-collapse top-nav waves-effect waves-light circle hide-on-large-only"><i class="material-icons">menu</i></a></div>
+	<ul id="nav-mobile" class="side-nav fixed">
+		<li class="logo"><a id="logo-container" href="{% url 'home' %}" class="brand-logo">
+			Home</a></li>
+		{% if request.user.is_authenticated %}
+			{% if perms.users.is_teacher %}
+				<li class="bold"><a href="{% url 'users:teachermypage' %}" class="waves-effect waves-teal">{{ request.user.username }}</a></li>
+			{% else %}
+				<li class="bold"><a href="{% url 'users:studentmypage' %}" class="waves-effect waves-teal">{{ request.user.username }}</a></li>
+			{% endif %}
+			<li class="bold"><a href="{% url 'users:logout' %}" class="waves-effect waves-teal">Logout</a></li>
+		{% else %}
+		<li class="bold"><a href="{% url 'users:login' %}" class="waves-effect waves-teal">Login</a></li>
+		<li class="no-padding">
+			<ul class="collapsible collapsible-accordion">
+				<li class="bold"><a class="collapsible-header  waves-effect waves-teal">Signup</a>
+					<div class="collapsible-body">
+						<ul>
+							<li><a href="{% url 'users:teachersignup' %}">Teacher Signup</a></li>
+							<li><a href="{% url 'users:studentsignup' %}">Student Signup</a></li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</li>
+		{% endif %}
+	</ul>
 </header>
