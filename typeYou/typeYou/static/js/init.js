@@ -14,6 +14,10 @@ $(document).ready(function(){
   $('.modal-trigger').leanModal();
 });
 
+$(document).ready(function() {
+  $('input#input_text, textarea#textarea1').characterCounter();
+});
+
 //  $('.parallax').parallax();
 
 

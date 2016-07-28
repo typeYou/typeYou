@@ -19,7 +19,7 @@
 			</form>
 			{% else %}
 				{% if request.user.is_authenticated %}
-				<a href="{% url "users:login" %}"><button class="btn-large mycolor-2">Solve Quiz</button></a>
+				<a href="{% url "quizzes:quiz_find" %}"><button class="btn-large mycolor-2">Solve Quiz</button></a>
 				{% else %}
 					<button class="modal-trigger btn-large mycolor-2" href="#modal2">Solve Quiz</button>
 				{% endif %}
@@ -51,38 +51,5 @@
 	<div class="modal-footer">
 		<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
 	</div>
-</div>
-
-<section>
-	<div class="row">
-		<div class="col s12 m8 offset-m4 l5 offset-l7">
-			<ul class="collapsible popout" data-collapsible="accordion">
-				<li>
-					<div class="collapsible-header"><i class="material-icons">list</i>show recent published quizzes</div>
-					<div class="collapsible-body">
-						<table class="centered">
-							<thead>
-								<tr>
-									<th data-field="quiz">Quiz</th>
-									<th data-field="created_by">created by</th>
-									<th data-field="created_at">created at</th>
-								</tr>
-							</thead>
-							<tbody>
-								{% for quiz in quizzes reversed %}
-								<tr>
-									<td><a href="{% url 'quizzes:quiz_detail' slug=quiz.hash_id %}">{{ quiz.hash_id }}</a></td>
-									<td>:: created by <a href="{% url 'users:teacherpage' slug=quiz.user.username %}">{{ quiz.user.username }}</a></td>
-									<td>{{ quiz.created_at }}</td>
-								</tr>
-								{% endfor %}
-							</tbody>
-						</table>
-					</div>
-				</li>
-			</ul>
-		</div>
-  </div>
-</section>
 </div>
 {% endblock %}
